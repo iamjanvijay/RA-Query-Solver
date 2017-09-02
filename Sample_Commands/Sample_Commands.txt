@@ -1,0 +1,66 @@
+
+// Creation Insertion & Save Queries
+
+*C [ Instructor ] [ ID INT ] [ NAME STRING ] [ DEPT_NAME STRING ] [ SALARY INT ];
+*I [ Instructor ] [ 10101 Srinivasan Comp.Sci. 65000 ];
+*I [ Instructor ] [ 12121 Wu Finance 90000 ];
+*I [ Instructor ] [ 15151 Mozart Music 80000 ];
+*I [ Instructor ] [ 22222 Einstein Physics 50000 ];
+*I [ Instructor ] [ 32343 El'Said History 87000 ];
+*I [ Instructor ] [ 33456 Gold Physics 75000 ];
+*I [ Instructor ] [ 45565 Katz Comp.Sci. 92000 ];
+*S [ Instructor ];
+
+*C [ Course ] [ COURSE_ID STRING ] [ TITLE STRING ] [ DEPT_NAME STRING ] [ CREDITS INT ];
+*I [ Course ] [ BIO-101 Into_to_Biology Biology 4 ];
+*I [ Course ] [ BIO-301 Genetics Biology 4 ];
+*I [ Course ] [ BIO-399 Computational_Biology Biology 3 ];
+*I [ Course ] [ CS-101 Into_to_Computer_Science Comp.Sci. 4 ];
+*I [ Course ] [ CS-190 Game_Design Comp.Sci. 4 ];
+*I [ Course ] [ CS-319 Image_Processing Comp.Sci. 3 ];
+*I [ Course ] [ CS-315 Robotics Comp.Sci. 4 ];
+*I [ Course ] [ CS-347 Database_Sydtem_Concepts Comp.Sci. 5 ];
+*S [ Course ];
+
+*C [ Prereq ] [ COURSE_ID STRING ] [ PREREQ_ID STRING ];
+*I [ Prereq ] [ BIO-301 BIO-101 ];
+*I [ Prereq ] [ BIO-399 BIO-101 ];
+*I [ Prereq ] [ CS-190 CS-101 ];
+*I [ Prereq ] [ CS-315 CS-101 ];
+*I [ Prereq ] [ CS-319 CS-101 ];
+*I [ Prereq ] [ CS-347 CS-101 ];
+*S [ Prereq ];
+*V;
+// RA Queries
+
+[ [ Course J Prereq ] S ((CREDITS>=4@C)&(DEPT_NAME==Comp.Sci.@C)) ];
+[ [ Course J Prereq ] S (CREDITS>=4@C) ];
+
+
+// Execution Sample :
+
+								***RA-Query***
+> Relations in Permanent Database are :
+1) Instructor
+2) Course
+3) Prereq
+> [ [ Course J Prereq ] S (CREDITS>=4@C) ];
++-----------+--------------------------+-----------+---------+-----------+
+| COURSE_ID |                    TITLE | DEPT_NAME | CREDITS | PREREQ_ID |
++-----------+--------------------------+-----------+---------+-----------+
+|    CS-190 |              Game_Design | Comp.Sci. |       4 |    CS-101 |
+|    CS-315 |                 Robotics | Comp.Sci. |       4 |    CS-101 |
+|    CS-347 | Database_Sydtem_Concepts | Comp.Sci. |       5 |    CS-101 |
++-----------+--------------------------+-----------+---------+-----------+
+> [ [ Course J Prereq ] S ((CREDITS>=4@C)&(DEPT_NAME==Comp.Sci.@C)) ];
++-----------+--------------------------+-----------+---------+-----------+
+| COURSE_ID |                    TITLE | DEPT_NAME | CREDITS | PREREQ_ID |
++-----------+--------------------------+-----------+---------+-----------+
+|   BIO-301 |                 Genetics |   Biology |       4 |   BIO-101 |
+|    CS-190 |              Game_Design | Comp.Sci. |       4 |    CS-101 |
+|    CS-315 |                 Robotics | Comp.Sci. |       4 |    CS-101 |
+|    CS-347 | Database_Sydtem_Concepts | Comp.Sci. |       5 |    CS-101 |
++-----------+--------------------------+-----------+---------+-----------+
+> *E;
+
+
