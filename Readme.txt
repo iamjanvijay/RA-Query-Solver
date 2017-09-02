@@ -4,7 +4,7 @@ Instructions to create executable file :
 	1) Execte the following command in terminal : g++ -std=c++11 QProcessor.cpp  -o RAQuery
 	2) Now execute the RAQuery executable so created.
 
-This tool has been developed by Janvijay Singh [ 14075061 ], as a part of DBMS project for session 2016-17 under the guidence of Proff. Ravindranath Chowdary C.
+This tool has been developed by Janvijay Singh under the guidence of Proff. Ravindranath Chowdary C.
 
 This tool assumes input as space-seprated stream of tokens. So it is advised to seprate each token by atleast one space & Relation names / Attribute names / Attribute Values must be devoid of any spaces as well ( Use '_' for multi-word Relation names / Attribute names / Attribute Values ). This tool is Case-Sensitive. So it is advised to keep case in mind while executing queries. Operations available in this tool & their Syntax is as given below :
 
